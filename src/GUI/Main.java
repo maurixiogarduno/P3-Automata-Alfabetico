@@ -1,32 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author W10
+ * @author Jedidian
  */
 
-    
-
-
 public class Main extends javax.swing.JFrame {
-    
-    String sym = "()*|ab";
-    //String op = "01";
+    /* 0 y 1 -> Parentesis
+    * 2 y 4 -> Operadores
+    * 5 y 6 -> Operandos
+    * 7 -> fin de linea ... ;
+    */
+    String sym = "()*|ab;";
     
     /**
      * Creates new form Login
      */
     public Main() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
         
     }
 
@@ -43,8 +36,7 @@ public class Main extends javax.swing.JFrame {
         Btn_salir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        Txt_cadena = new javax.swing.JTextField();
-        Btn_actualizar = new javax.swing.JButton();
+        Txt_string = new javax.swing.JTextField();
         Btn_limpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TxtA_caracteres = new javax.swing.JTextArea();
@@ -68,21 +60,17 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1.setText("Insertar Cadena: ");
 
-        Txt_cadena.addActionListener(new java.awt.event.ActionListener() {
+        Txt_string.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Txt_cadenaActionPerformed(evt);
+                Txt_stringActionPerformed(evt);
             }
         });
-        Txt_cadena.addKeyListener(new java.awt.event.KeyAdapter() {
+        Txt_string.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                Txt_cadenaKeyTyped(evt);
+                Txt_stringKeyTyped(evt);
             }
-        });
-
-        Btn_actualizar.setText("Aceptar");
-        Btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_actualizarActionPerformed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Txt_stringKeyReleased(evt);
             }
         });
 
@@ -109,26 +97,26 @@ public class Main extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(Btn_limpiar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Btn_actualizar))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(Txt_cadena))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane1))
-                            .addGap(29, 29, 29)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Btn_limpiar))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Txt_string))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1))
+                                .addGap(29, 29, 29)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(25, 25, 25))
         );
         jPanel2Layout.setVerticalGroup(
@@ -137,17 +125,15 @@ public class Main extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(Txt_cadena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Btn_actualizar)
-                    .addComponent(Btn_limpiar))
-                .addGap(7, 7, 7)
+                    .addComponent(Txt_string, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addComponent(Btn_limpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -159,13 +145,14 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(457, 457, 457)
-                .addComponent(Btn_salir)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Btn_salir))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
@@ -192,38 +179,40 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Txt_cadenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_cadenaActionPerformed
+    private void Txt_stringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_stringActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Txt_cadenaActionPerformed
+    }//GEN-LAST:event_Txt_stringActionPerformed
 
     private void Btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_limpiarActionPerformed
         // TODO add your handling code here:
-        Txt_cadena.setText("");
+        Txt_string.setText("");
         TxtA_caracteres.setText("");
-        TxtA_caracteres.setText("");
+        TxtA_cadena.setText("");
     }//GEN-LAST:event_Btn_limpiarActionPerformed
-
-    private void Btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_actualizarActionPerformed
-        
-
-        String cadena = Txt_cadena.getText();        
-        evaluarCadena(cadena);
-        
-    }//GEN-LAST:event_Btn_actualizarActionPerformed
 
     private void Btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_salirActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_Btn_salirActionPerformed
 
-    private void Txt_cadenaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Txt_cadenaKeyTyped
+    private void Txt_stringKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Txt_stringKeyTyped
         
-        // TODO add your handling code here:        
-        char c = evt.getKeyChar();
-        
-        revisarCaracter(c);
+    }//GEN-LAST:event_Txt_stringKeyTyped
 
-    }//GEN-LAST:event_Txt_cadenaKeyTyped
+    private void Txt_stringKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Txt_stringKeyReleased
+       
+        // Codigo al actualizar la cadena
+        boolean valida = true;
+        String cadena = Txt_string.getText();
+        valida = evaluarCadena(cadena);
+
+        if (valida == true) {
+            TxtA_cadena.setText("Cadena Valida");
+        } else {
+            TxtA_cadena.setText("Cadena  Invalida");
+        }
+  
+    }//GEN-LAST:event_Txt_stringKeyReleased
 
     /**
      * @param args the command line arguments
@@ -264,12 +253,11 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Btn_actualizar;
     private javax.swing.JButton Btn_limpiar;
     private javax.swing.JButton Btn_salir;
     private javax.swing.JTextArea TxtA_cadena;
     private javax.swing.JTextArea TxtA_caracteres;
-    private javax.swing.JTextField Txt_cadena;
+    private javax.swing.JTextField Txt_string;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -279,31 +267,39 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
-    public void evaluarCadena(String cadena) {
-
-        TxtA_caracteres.setText("Revisando Cadena ...");
+    public boolean evaluarCadena(String cadena) {
         
-    }
-    
-    public void revisarCaracter(char c) {
+        boolean valido = true;
+        
+        if( !cadena.equalsIgnoreCase("") ){
+        
+            String nuevo = "";
+            boolean encontrado = false;
+            
+            for (int i = 0; i < cadena.length(); i++) {
                 
-        String cadenaAnterior = TxtA_caracteres.getText();
-        boolean encontrado  = false;
-               
-        //Revicion de si el caracter es valido
-       // do{
-            for(int i = 0; i < sym.length(); i++){
-                    
-                if ( c == sym.charAt(i) ) {
-                    //evt.consume();
-                    encontrado  = true;
-                    String cadenaNueva = cadenaAnterior + "\n " + c+": Caracter Valido";
-                    TxtA_caracteres.setText( cadenaNueva );
+                char c = cadena.charAt(i) ;
+                String actual = "";
+           
+                int pos = sym.indexOf( c );
+                
+                if( pos != -1){
+                    actual = c + " -> caracter valido \n";
                     encontrado = true;
+                }else{
+                    actual = c + " -> caracter NO valido \n";
+                    encontrado = true;
+                    valido = false;
                 }
+                
+                nuevo = nuevo + actual + "\n";
+                TxtA_caracteres.setText( nuevo );
             }
-       
-    //}while(encontrado == false);
         
+        }else{
+            TxtA_cadena.setText("La cadena esta vacia ...");
+        }
+        
+        return valido;
     }
 }
